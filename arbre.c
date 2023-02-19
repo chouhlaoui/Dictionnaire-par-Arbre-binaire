@@ -1,83 +1,92 @@
-/* ------------------------------------------------------- */
-/* Eval TP IC2 2013 (MM)                                   */
-/* fichier "arbre.c"                                       */
-/* ------------------------------------------------------- */
-
-#include <stdio.h>
-#include <stdlib.h>
 #include "arbre.h"
 
 
-
-/* ------------------------------------------------------- */
-/* Primitives de gestion des arbres                        */
-/* ------------------------------------------------------- */
-
+/* Initialise an empty Tree */
 TArbre arbreConsVide(void)
 {
-  return NULL;
+    return NULL;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
+/* Check if it's an empty Tree */
 int arbreEstVide(TArbre a)
 {
-  return (a==NULL);
+    return (a==NULL);
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
+/* Initialise a Constant Tree */
 TArbre arbreCons(char c, int n, TArbre fg, TArbre fd)
 {
-  TArbre temp;
+    TArbre temp;
 
-  temp = (TArbre)malloc(sizeof(struct TNoeud));
-  temp->lettre     = c;
-  temp->nbocc      = n;
-  temp->filsGauche = fg;
-  temp->filsDroit  = fd;
+    temp = (TArbre)malloc(sizeof(struct TNoeud));
+    temp->lettre     = c;
+    temp->nbocc      = n;
+    temp->filsGauche = fg;
+    temp->filsDroit  = fd;
 
-  return temp;
+    return temp;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
+/* Get the letter */
 char arbreRacineLettre(TArbre a)
 {
-  return a->lettre;
+    return a->lettre;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+/* Find the occurence of a word */
 int arbreRacineNbOcc(TArbre a)
 {
-  return a->nbocc;
+    return a->nbocc;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
+/* Pass to the left part */
 TArbre arbreFilsGauche(TArbre a)
 {
-  return a->filsGauche;
+    return a->filsGauche;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
+/* Pass to the right part */
 TArbre arbreFilsDroit(TArbre a)
 {
-  return a->filsDroit;
+    return a->filsDroit;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-void arbreSuppr(TArbre a)
+/* Delete the whole tree */
+TArbre arbreSuppr(TArbre a)
 {
-  if (!arbreEstVide(a))
+    if (!arbreEstVide(a))
     {
-      arbreSuppr(a->filsGauche);
-      arbreSuppr(a->filsDroit);
-      free(a);
+        arbreSuppr(a->filsGauche);
+        arbreSuppr(a->filsDroit);
+        free(a);
+    }
+
+    a = NULL;
+    
+    return a;
+}
+
+// Function to calculate the tree height 
+int treeHeight(TArbre root) {
+
+    if (root == NULL) 
+    {
+        return 0;
+    } 
+
+    else 
+    {
+        int leftHeight = treeHeight(root->filsGauche);
+        int rightHeight = treeHeight(root->filsDroit);
+
+        if (leftHeight > rightHeight) 
+        {
+            return leftHeight + 1;
+        } 
+        else 
+        {
+            return rightHeight + 1;
+        }
     }
 }
-
-/* ------------------------------------------------------- */

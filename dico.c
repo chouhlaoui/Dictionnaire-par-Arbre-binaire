@@ -1,65 +1,181 @@
-/* 
-
-Ces fonctions piochent au hasard un mot dans un fichier dictionnaire
-pour le jeu du Pendu
-
-*/
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-
 #include "dico.h"
 
-int piocherMot(char *motPioche)
+
+void Afficher(TArbre a, char prefixe[], int pos)
 {
+    if (!arbreEstVide(a))
+    {
+        prefixe[pos] = arbreRacineLettre(a);
 
-FILE* dico = NULL; // Le pointeur de fichier qui va contenir notre fichier
-int nombreMots = 0, numMotChoisi = 0, i = 0;
-int caractereLu = 0;
+        if (arbreRacineLettre(a) == '\0')
+            {
+                printf("\"%s\" [%d]\n", prefixe, arbreRacineNbOcc(a));
+            }
 
-dico = fopen("dico.txt", "r"); // On ouvre le dictionnaire en lecture seule
-
-// On vérifie si on a réussi à ouvrir le dictionnaire
-if (dico == NULL) // Si on n'a PAS réussi à ouvrir le fichier
-{
-printf("\nImpossible de charger le dictionnaire de mots");
-return 0; // On retourne 0 pour indiquer que la fonction a échoué
-// À la lecture du return, la fonction s'arrête immédiatement.
+        Afficher(arbreFilsGauche(a), prefixe, pos+1);
+        Afficher(arbreFilsDroit(a), prefixe, pos);
+    }
 }
 
-// On compte le nombre de mots dans le fichier (il suffit de compter les entrées \n
-do
-{
-caractereLu = fgetc(dico);
-if (caractereLu == '\n')
-nombreMots++;
-} while(caractereLu != EOF);
+/* --------------------------------------------------- */
 
-numMotChoisi = nombreAleatoire(nombreMots); // On pioche un mot au hasard
-
-// On recommence à lire le fichier depuis le début. On s'arrête lorsqu'on est arrivé au bonmot
-rewind(dico);
-while (numMotChoisi > 0)
+void InsererMot(char mot[], int debut, TArbre *Tree)
 {
-caractereLu = fgetc(dico);
-if (caractereLu == '\n')
-numMotChoisi--;
+    if (arbreEstVide(*Tree)) /* Empty Dictionnary */
+    {
+        *Tree = arbreCons(mot[debut], 0, arbreConsVide(), arbreConsVide());
+
+        if (debut == strlen(mot))
+        {
+            ((*Tree)->nbocc)++;
+        }
+
+        else
+        {
+            InsererMot(mot, debut+1, &((*Tree)->filsGauche));
+        }
+    }
+
+    else if (mot[debut] < arbreRacineLettre(*Tree)) /* the word starts with a letter smaller than the letter in the dictionnary */
+    {
+        *Tree = arbreCons(mot[debut], 0, arbreConsVide(), *Tree);
+        if (debut == strlen(mot))
+        {
+            ((*Tree)->nbocc)++;
+        }
+
+        else
+        {
+            InsererMot(mot, debut+1, &((*Tree)->filsGauche));
+        }
+    }
+
+    else if (mot[debut] > arbreRacineLettre(*Tree)) /* the word starts with a letter bigger than the letter in the dictionnary */
+    {
+        InsererMot(mot, debut, &((*Tree)->filsDroit));
+    }
+
+    else /* the word starts with a letter same letter in the dictionnary */
+    {
+        if (debut == strlen(mot))
+        {
+            ((*Tree)->nbocc)++;
+        }
+
+        else
+        {
+            InsererMot(mot, debut+1, &((*Tree)->filsGauche));
+        }
+    }
 }
 
-/* Le curseur du fichier est positionné au bon endroit. On n'a plus qu'à faire un fgets qui lira la ligne */
-fgets(motPioche, 100, dico);
+/* --------------------------------------------------- */
 
-// On vire le \n à la fin
-motPioche[strlen(motPioche) - 1] = '\0';
-fclose(dico);
-
-return 1; // Tout s'est bien passé, on retourne 1
-}
-
-int nombreAleatoire(int nombreMax)
+int NbOcc(char mot[], int debut, TArbre a)
 {
-srand(time(NULL));
-return (rand() % nombreMax);
+    if (arbreEstVide(a)) /* Empty Dictionnary */
+    {
+        return 0;
+    }
+
+    else if (debut > strlen(mot)) /* The word doesn't belong to the dictionnary */
+    {
+        return 0;
+    }
+
+    else if (mot[debut] < arbreRacineLettre(a)) /* the first letter of the word < the letter in the dictionnary */
+    {
+        return 0;
+    }
+
+    else if (mot[debut] == arbreRacineLettre(a)) /* The word starts with the same letter as dictionnary */
+    {
+        if (mot[debut] == '\0')
+        {
+            return arbreRacineNbOcc(a);
+        }
+
+        else
+        {
+            return NbOcc(mot, debut+1, arbreFilsGauche(a));
+        }
+    }
+
+    else /* The word doesn't start with the same letter as dictionnary so we keep diging */
+    {
+        return NbOcc(mot, debut, arbreFilsDroit(a));
+    }
 }
+
+/* ------------------------------------------------------- */
+
+// Calculate all the distinct words
+
+int calcul(TArbre a)
+{
+    int x=0;
+    if (!arbreEstVide(a))
+    {
+        if (arbreRacineLettre(a)=='\0')
+        {
+            x=1;
+        }
+
+        x = x + calcul(arbreFilsGauche(a));
+        x = x + calcul(arbreFilsDroit(a));
+    }
+    else
+    {
+        x = 0;
+    }
+
+    return x ;
+}
+
+// Calculate all the existing words using the occurrence of each word
+
+int calculTous(TArbre a)
+{
+    int x=0;
+    if (!arbreEstVide(a))
+    {
+        if (arbreRacineLettre(a)=='\0')
+        {
+            x = arbreRacineNbOcc(a);
+        }
+
+        x = x + calculTous(arbreFilsGauche(a));
+        x = x + calculTous(arbreFilsDroit(a));
+    }
+    return x ;
+}
+
+
+void dicoAfficher(TArbre a)
+{
+    char buffer[100];
+
+    Afficher(a, buffer, 0);
+}
+
+void dicoInsererMot(char mot[], TArbre *Tree)
+{
+    InsererMot(mot, 0, Tree);
+}
+
+int dicoNbOcc(char mot[], TArbre a)
+{
+    return NbOcc(mot, 0, a);
+}
+
+int dicoNbMotDifferent(TArbre a)
+{
+    return calcul(a);
+}
+
+int dicoNbMotsTotal(TArbre a)
+{
+    return calculTous(a);
+}
+
+

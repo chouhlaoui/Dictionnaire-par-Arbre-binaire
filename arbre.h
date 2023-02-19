@@ -1,7 +1,10 @@
-/* ------------------------------------------------------- */
-/* Eval TP IC2 2013 (MM)                                   */
-/* fichier "arbre.h"                                       */
-/* ------------------------------------------------------- */
+#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <readline/readline.h>
+#include<sys/types.h>
+
 
 struct TNoeud {
   char lettre;
@@ -13,20 +16,13 @@ struct TNoeud {
 typedef struct TNoeud* TArbre;
 
 
-
-/* ------------------------------------------------------- */
-/* Primitives de gestion des arbres                        */
-/* ------------------------------------------------------- */
-
 TArbre arbreConsVide(void);
 int    arbreEstVide(TArbre a);
 TArbre arbreCons(char c, int n, TArbre fg, TArbre fd);
 char   arbreRacineLettre(TArbre a);
+int arbreRacineLevel(TArbre a);
 int    arbreRacineNbOcc(TArbre a);
 TArbre arbreFilsGauche(TArbre a);
 TArbre arbreFilsDroit(TArbre a);
-void   arbreSuppr(TArbre a);
-
-
-
-/* ------------------------------------------------------- */
+TArbre   arbreSuppr(TArbre a);
+int treeHeight(TArbre root) ;

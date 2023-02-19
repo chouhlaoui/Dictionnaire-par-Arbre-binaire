@@ -1,53 +1,48 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "arbre.h"
-
-/* ------------------------------------------------------- */
-/* Eval TP IC2 2013 (MM) */
-/* fichier "projet.c" */
-/* ------------------------------------------------------- */
-#include <stdio.h>
 #include "dico.h"
-/* ------------------------------------------------------- */
+
+
 int main(int argc, char **argv)
 {
-TArbre dico;
-char buffer[100];
-dico = arbreConsVide();
-strcpy(buffer, "gallon");
-dicoInsererMot(buffer, &dico);
-dicoAfficher(dico);
-printf("\n");
-strcpy(buffer, "munier");
-dicoInsererMot(buffer, &dico);
-dicoAfficher(dico);
-printf("\n");
-strcpy(buffer, "abenia");
-dicoInsererMot(buffer, &dico);
-dicoAfficher(dico);
-printf("\n");
-strcpy(buffer, "munier");
-dicoInsererMot(buffer, &dico);
-dicoAfficher(dico);
-printf("\n");
-strcpy(buffer, "mumu");
-dicoInsererMot(buffer, &dico);
-dicoAfficher(dico);
-printf("\n");
-strcpy(buffer, "alpha");
-dicoInsererMot(buffer, &dico);
-strcpy(buffer, "alphabeta");
-dicoInsererMot(buffer, &dico);
-strcpy(buffer, "al");
-dicoInsererMot(buffer, &dico);
-dicoAfficher(dico);
-printf("\n");
-printf("\"%s\" \t -> %d\n", "gallon", dicoNbOcc("gallon",dico));
-printf("\"%s\" \t\t -> %d\n", "mumu", dicoNbOcc("mumu",dico));
-printf("\"%s\" \t -> %d\n", "munier", dicoNbOcc("munier",dico));
-printf("\"%s\" \t -> %d\n", "gastro", dicoNbOcc("gastro",dico));
-printf("\"%s\" \t -> %d\n", "lespine", dicoNbOcc("lespine",dico));
-printf("\"%s\" \t\t -> %d\n", "aaa", dicoNbOcc("aaa",dico));
-printf("\n");
+    TArbre dico;
+    char typeConstruct[100];
+    char* filename;
+
+    dico = arbreConsVide();
+
+    printf("Would you like to construct your dictonnary manually ? YES or NO : ");
+    scanf("%s",typeConstruct);
+    makeUpperCase(typeConstruct);
+
+    while (1)
+    {
+        
+        if(strcmp(typeConstruct,"YES")==0)
+        {
+            readwords(&dico);
+            Execute(&dico);
+            return 0;
+        }
+
+        else if(strcmp(typeConstruct,"NO")==0)
+        {
+            printf("Please provide your file name : ");
+            filename = readline("");
+            readfile(filename,&dico);
+            Execute(&dico);
+            return 0;
+        }
+
+        else if (strcmp(typeConstruct,"QUIT")==0)
+        {
+            return 0;
+        }
+
+        else 
+        {
+            printf("Would you like to construct your dictonnary manually ? YES or NO : ");
+            scanf("%s",typeConstruct);
+        }
+
+    }   
+
 }
-/* ------------------------------------------------------- */
