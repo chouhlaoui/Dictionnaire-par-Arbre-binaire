@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#define WIDTH 1200
+#define WIDTH 1400
 #define HEIGHT 675
 
 // Display the graphical tree in a new window
@@ -25,19 +25,20 @@ void WindowDisplay(char tableau[][10000], int nbLignes, int nbColonnes)
     // Create renderer
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+
     // Create font
-    TTF_Font* font = TTF_OpenFont("Verdana.ttf", 16);
+    TTF_Font* font = TTF_OpenFont("Verdana.ttf", 18);
 
     // Render grid
     SDL_Color textColor = { 255, 255, 255 };
     SDL_Surface* surface;
     SDL_Texture* texture;
     SDL_Rect cellRect;
-
+    
     for (int i = 4; i < nbLignes+4; i++) {
-        for (int j = 1; j < nbColonnes+1; j++) {
+        for (int j = 0; j < nbColonnes; j++) {
             // Render cell
-            surface = TTF_RenderText_Solid(font, &tableau[i-4][j-1], textColor);
+            surface = TTF_RenderText_Solid(font, &tableau[i-4][j], textColor);
             texture = SDL_CreateTextureFromSurface(renderer, surface);
             SDL_FreeSurface(surface);
             cellRect.x = j * CELL_W;
