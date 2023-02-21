@@ -1,5 +1,6 @@
 #include "dico.h"
 
+// Read words from the file and add them to the dictionnary
 
 void readfile(char FileName[],TArbre *dic)
 {

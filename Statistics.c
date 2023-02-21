@@ -78,6 +78,7 @@ void stats(TArbre dic)
 
     printf("Number of distinct words = %d \nTotal number of words = %d \n", dicoNbMotDifferent(dic), dicoNbMotsTotal(dic));
     printf("Average length = %.2f \nMaximum = %d \nMinimum = %d \n", summ/(float)dicoNbMotsTotal(dic), Maximum, Minimum);
+    printf("Dictionnary's height : %d \n",treeHeight(dic));
     
     /* Show the longest words */
     

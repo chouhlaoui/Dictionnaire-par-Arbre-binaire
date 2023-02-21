@@ -43,6 +43,7 @@ void Execute(TArbre *dic)
                 break;
 
             case 3:
+                // show the dictionnary
                 if (*dic == NULL)
                 {
                     printf("Your dictionnary is empty .\n");
@@ -52,6 +53,7 @@ void Execute(TArbre *dic)
                 break;
 
             case 4:
+                // show the dictionnary
                 if (*dic == NULL)
                 {
                     printf("Your dictionnary is empty .\n");
@@ -61,10 +63,12 @@ void Execute(TArbre *dic)
                 break;
 
             case 5:
+                // Show the stats
                 stats(*dic);
                 break;
 
             case 6:
+                // Check if a word belongs
                 WordToCheck = readline("Please provide the word to check : ");
 
                 int occ = dicoNbOcc(WordToCheck, *dic);
@@ -84,44 +88,47 @@ void Execute(TArbre *dic)
                 break;
             
             case 8:
-
-                Rows = treeHeight(*dic);
-                Cols = power(2,Rows);
-                char table[1000][10000] = {0};
-                printf("%d ", Rows);
-                
-                // generate the table containing the binary tree
-            
-                graphic(*dic, table, 0, 0, Cols);
-                
-                // Print The binary tree in a graphic way
-                int i, j;
-                for (i = 0; i < Rows ; i++) 
+                if (*dic == NULL)
                 {
-                    for (j = 0; j < Cols ; j++) 
+                    printf("Your dictionnary is empty .\n");
+                }
+                else
+                {
+                    Rows = treeHeight(*dic);
+                    Cols = power(2,Rows);
+                    char table[1000][10000] = {0};
+                    
+                    // generate the table containing the binary tree
+                    graphic(*dic, table, 0, 0, Cols);
+                    
+                    // Print The binary tree in a graphic way
+                    int i, j;
+                    for (i = 0; i < Rows ; i++) 
                     {
-                        if (table[i][j] > 0) 
+                        for (j = 0; j < Cols ; j++) 
                         {
-                            if (table[i][j] == '\0' ) 
-                            {
-                                printf("\\0");
-                            } 
-                            else
+                            if (table[i][j] > 0) 
                             {
                                 printf("%c", table[i][j]);
+                            } 
+                            else 
+                            {
+                                printf(" ");
                             }
-                        } 
-                        else 
-                        {
-                            printf(" ");
                         }
+                        printf("\n");printf("\n");printf("\n");
                     }
-                    printf("\n");printf("\n");printf("\n");
+                    
+                    WindowDisplay(table,Rows,Cols);
                 }
+
+
     
                 break;
 
             default:
+                // Wrong choice handeling
+
                 printf("Wrong choice, please rechoose : ");
                 scanf("%d",&choice);
                 ChoiceTwo = 1;

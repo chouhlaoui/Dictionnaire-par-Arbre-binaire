@@ -4,6 +4,8 @@
 #include <ctype.h>
 #include <readline/readline.h>
 #include<sys/types.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 
 struct TNoeud {

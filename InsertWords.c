@@ -8,6 +8,7 @@ void makeUpperCase(char *str)
     }
 }
 
+// Read words from the line and add them to the dictionnary
 void readwords(TArbre *dic)
 {
     char* WordToBeAdded;

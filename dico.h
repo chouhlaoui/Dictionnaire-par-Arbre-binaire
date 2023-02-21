@@ -1,6 +1,5 @@
 #include "arbre.h"
 
-
 void TreeListWords(TArbre a);
 void dicoAfficher(TArbre a);
 void dicoInsererMot(char mot[], TArbre *pa);
@@ -18,4 +17,7 @@ void makeUpperCase(char *str);
 int power(int x,int n);
 
 void graphic(TArbre root, char table[][10000], int level, int left, int right);
+void WindowDisplay(char tableau[][10000], int NBL, int NBC);
 
+int piocherMot(char *motPioche);
+int nombreAleatoire(int nombreMax);

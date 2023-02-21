@@ -1,5 +1,7 @@
 #include "dico.h"
 
+//Print the words without stats about each word
+
 void ListWords(TArbre a, char prefixe[], int pos)
 {
     if (!arbreEstVide(a))
