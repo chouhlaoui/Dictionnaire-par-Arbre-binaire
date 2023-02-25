@@ -2,6 +2,9 @@
 Creation of a binary tree which will represent a dictionary with which we will ensure spelling correction.
 
 ## Usage
+1. First list item
+   - First nested list item
+     - Second nested list item
 
 #### With this Dictionary you can:
 
