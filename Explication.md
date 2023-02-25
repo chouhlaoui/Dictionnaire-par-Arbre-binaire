@@ -3,7 +3,7 @@ Creation of a binary tree which will represent a dictionary with which we will e
 
 ## Usage
 
-###### With this Dictionary you can:
+#### With this Dictionary you can:
 
 -  Creating an empty dictionary
 -  Adding words to the existing dictionary:
