@@ -44,13 +44,87 @@ A node can contain :
     - Words beginning with A followed by B 
          - Moving to the LEFT :               
                   - ABD is a possible word
-         - Going RIGHT: AE is a possible word:      
+         - Going RIGHT:       
                   - AE is a possible word  
                   
                   
 - Moving to the RIGHT : 
-    - C: words beginning with C 
+    - Words beginning with C 
          - Moving to the LEFT :               
                   - CF is a possible word
-         - Going RIGHT: G: words beginning with G      
-                  - G: Words beginning with G
+         - Going RIGHT:     
+                  - G is a possible word
+
+
+
+## Requirements (required) (For UNIX users)
+
+Install gcc 
+
+```bash
+  sudo apt install gcc
+  sudo apt install build-essential
+```
+
+Verify make version 
+
+```bash
+  make -version
+```
+
+Install make if you don't have it
+
+```bash
+  make -version
+  sudo apt install make
+```
+
+Install SDL if you don't have it
+
+```bash
+  sudo apt-get install libsdl2
+  sudo apt-get install libsdl2-dev
+```
+
+Install SDL_TTF if you don't have it
+
+```bash
+  sudo apt-get install libsdl2-ttf-dev
+```
+
+
+
+## Run Locally
+
+
+Clone the project
+
+```bash
+  git clone https://github.com/chouhlaoui/Dictionnaire-par-Arbre-binaire.git
+```
+
+Go to the project directory
+
+```bash
+  cd Dictionnaire-par-Arbre-binaire.git
+```
+
+Compile the project 
+```bash
+  make Compile
+```
+
+Start the program
+
+```bash
+  make Run
+```
+
+Remove the executable file
+
+```bash
+  make Reset
+```
+
+## Testing
+We've added 2 files you can use them for tests.
