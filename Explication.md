@@ -1,40 +1,56 @@
-# Dictionnaire-par-Arbre-binaire
-Création d'une arbre binaire qui va representer un dictionnaire avec lequel on va assurer la correction orthographique.
+# Dictionary Using a Binary Tree
+Creation of a binary tree which will represent a dictionary with which we will ensure spelling correction.
 
-Manipulation du dictionnaire : 
-- Tester si les mots appartiennet 
-- Ajouter les mots 
+## Usage
 
-Structure de l'arbre : 
-- Racine contenant une lettre c et un entier x 
-- Noeud peut contenir :
-    - \0 : qui indique la fin d'un mot et x = 0 
-    - Une lettre c et un entier x
- 
- x indique le nombre d'occurences du mot en question 
- 
- Passage dans l'arbre : 
- - Passage vers la GAUCHE : Lecture de la lettre suivante 
- - Passage vers la DROITE : Lecture d'une nouvelle lettre de meme niveau 
+With this Dictionary you can:
+
+-  Creating an empty dictionary
+-  Adding words to the existing dictionary:
+    -  Adding with a text file
+    -  Manual addition from the command line
+-  Displaying the contents of the dictionary :
+    -  With the occurrences of each word
+    -  Without the occurrences of each word
+-  Display of the dictionary content as a graphical tree : 
+    -  In another window with SDL 
+    -  In the command line
+-  Test the existence of a word in the dictionary 
+
+-  Statistics: total number of words, number of different words, longest word, shortest word, average word length ...
+
+-  Deletion of all dictionary entries
+
+
+Structure of the tree :
+
+A node can contain :
+-   \0 : which indicates the end of a word and x = number of occurrences of the word
+-   A letter c and x = 0
+
+Passage through the tree :
+
+-   Passage to the LEFT: Read the next letter in the word
+-   Passage to the RIGHT: Reading of a new letter of the same level
  
  Exemple :
  
  ![image](https://user-images.githubusercontent.com/61617827/198856046-a8871747-56f4-41fc-89cf-722c822505f1.png)
  
- Interpretation de l'arbre :
+ Interpretation of the tree :
 
 
-- Allant vers la GAUCHE : 
-    - Les mots Commençant par A suivi par B 
-         - Allant vers la GAUCHE :               
-                  - ABD est un mot possible
-         - Allant vers la DROITE :      
-                  - AE est un mot possible  
+- Going to the LEFT : 
+    - Words beginning with A followed by B 
+         - Moving to the LEFT :               
+                  - ABD is a possible word
+         - Going RIGHT: AE is a possible word:      
+                  - AE is a possible word  
                   
                   
-- Allant vers la DROITE : 
-    - C : les mots commençant par C 
-         - Allant vers la GAUCHE :               
-                  - CF est un mot possible
-         - Allant vers la DROITE :      
-                  - G : Les mots commençant par G
+- Moving to the RIGHT : 
+    - C: words beginning with C 
+         - Moving to the LEFT :               
+                  - CF is a possible word
+         - Going RIGHT: G: words beginning with G      
+                  - G: Words beginning with G
