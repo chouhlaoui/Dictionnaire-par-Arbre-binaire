@@ -3,7 +3,7 @@ Creation of a binary tree which will represent a dictionary with which we will e
 
 ## Usage
 
-######With this Dictionary you can:
+###### With this Dictionary you can:
 
 -  Creating an empty dictionary
 -  Adding words to the existing dictionary:
@@ -22,22 +22,22 @@ Creation of a binary tree which will represent a dictionary with which we will e
 -  Deletion of all dictionary entries
 
 
-######Structure of the tree :
+###### Structure of the tree :
 
 A node can contain :
 -   \0 : which indicates the end of a word and x = number of occurrences of the word
 -   A letter c and x = 0
 
-######Passage through the tree :
+###### Passage through the tree :
 
 -   Passage to the LEFT: Read the next letter in the word
 -   Passage to the RIGHT: Reading of a new letter of the same level
  
- ######Exemple :
+ ###### Exemple :
  
  ![image](https://user-images.githubusercontent.com/61617827/198856046-a8871747-56f4-41fc-89cf-722c822505f1.png)
  
- ######Interpretation of the tree :
+ ###### Interpretation of the tree :
 
 
 - Going to the LEFT : 
