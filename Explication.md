@@ -6,7 +6,7 @@ Creation of a binary tree which will represent a dictionary with which we will e
    - First nested list item
      - Second nested list item
 
-#### With this Dictionary you can:
+#### 1. With this Dictionary you can:
 
 -  Creating an empty dictionary
 -  Adding words to the existing dictionary:
